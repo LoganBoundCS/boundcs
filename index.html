@@ -3,278 +3,385 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bound Contracting Services</title>
+<title>Bound Contracting Services — Daily Government Contract Intelligence</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Inter',system-ui,sans-serif;background:#0A0E1A;color:#E8EDF5;line-height:1.6;}
-  a{color:inherit;text-decoration:none;}
-  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#060B18;color:#E2E8F4;line-height:1.6;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;}
-  .logo{font-size:17px;font-weight:700;letter-spacing:1.5px;color:#fff;}
-  .logo span{color:#3B82F6;}
-  .nav-links{display:flex;gap:32px;font-size:14px;color:rgba(255,255,255,0.6);}
-  .nav-links a:hover{color:#fff;}
-  .nav-cta{background:#3B82F6;color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;letter-spacing:0.3px;}
-  .nav-cta:hover{background:#2563EB;}
+/* ── VARIABLES ── */
+:root{
+  --blue:#3B82F6;
+  --blue-dark:#1D4ED8;
+  --blue-light:#60A5FA;
+  --teal:#0EA5E9;
+  --green:#10B981;
+  --amber:#F59E0B;
+  --red:#EF4444;
+  --surface:#0D1426;
+  --surface2:#111827;
+  --surface3:#1A2235;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text-dim:rgba(255,255,255,0.45);
+  --text-mid:rgba(255,255,255,0.65);
+}
 
-  /* HERO */
-  .hero{padding:160px 0 100px;text-align:center;position:relative;overflow:hidden;}
-  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);color:#93C5FD;font-size:13px;padding:6px 16px;border-radius:100px;margin-bottom:32px;font-weight:500;}
-  .hero-badge-dot{width:6px;height:6px;background:#3B82F6;border-radius:50%;animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-  .hero h1{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;color:#fff;margin-bottom:24px;}
-  .hero h1 span{color:#3B82F6;}
-  .hero p{font-size:18px;color:rgba(255,255,255,0.55);max-width:560px;margin:0 auto 48px;line-height:1.7;}
-  .hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-  .btn-primary{background:#3B82F6;color:#fff;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s;}
-  .btn-primary:hover{background:#2563EB;transform:translateY(-1px);}
-  .btn-ghost{background:rgba(255,255,255,0.06);color:#fff;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:500;border:1px solid rgba(255,255,255,0.1);transition:all 0.2s;}
-  .btn-ghost:hover{background:rgba(255,255,255,0.1);}
+/* ── UTILS ── */
+.container{max-width:1120px;margin:0 auto;padding:0 28px;}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue-light);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+.section-title{font-size:clamp(28px,3.5vw,44px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.15;margin-bottom:16px;}
+.section-sub{font-size:17px;color:var(--text-dim);max-width:520px;line-height:1.75;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s;border:none;cursor:pointer;}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:500;border:1px solid var(--border2);transition:all 0.2s;cursor:pointer;}
+.btn-ghost:hover{background:rgba(255,255,255,0.09);}
+.btn-teal{background:linear-gradient(135deg,#0EA5E9,#0284C7);color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;cursor:pointer;border:none;}
+.btn-teal:hover{opacity:0.9;transform:translateY(-1px);}
 
-  /* STATS */
-  .stats{padding:60px 0;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
-  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;}
-  .stat-item{text-align:center;padding:32px 24px;border-right:1px solid rgba(255,255,255,0.06);}
-  .stat-item:last-child{border-right:none;}
-  .stat-num{font-size:40px;font-weight:800;color:#3B82F6;letter-spacing:-1px;}
-  .stat-label{font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;letter-spacing:0.8px;}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(6,11,24,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;}
+.logo{font-size:18px;font-weight:800;letter-spacing:1px;color:#fff;}
+.logo span{color:var(--blue);}
+.logo small{font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:0.5px;display:block;margin-top:-2px;}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--text-mid);}
+.nav-links a:hover{color:#fff;}
+.nav-actions{display:flex;gap:12px;align-items:center;}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;transition:all 0.2s;}
+.nav-cta:hover{background:var(--blue-dark);}
 
-  /* SECTIONS */
-  section{padding:100px 0;}
-  .section-tag{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#3B82F6;margin-bottom:16px;}
-  .section-title{font-size:clamp(28px,3vw,42px);font-weight:800;color:#fff;letter-spacing:-0.8px;line-height:1.2;margin-bottom:16px;}
-  .section-sub{font-size:17px;color:rgba(255,255,255,0.5);max-width:540px;line-height:1.7;}
+/* ── HERO ── */
+.hero{padding:160px 0 100px;text-align:center;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(59,130,246,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);color:#93C5FD;font-size:13px;padding:7px 18px;border-radius:100px;margin-bottom:36px;font-weight:500;}
+.pulse{width:7px;height:7px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+.hero h1{font-size:clamp(38px,5.5vw,70px);font-weight:900;line-height:1.08;letter-spacing:-2px;color:#fff;margin-bottom:28px;}
+.hero h1 .line2{color:var(--blue);}
+.hero-sub{font-size:19px;color:var(--text-dim);max-width:580px;margin:0 auto 52px;line-height:1.7;}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:72px;}
+.hero-trust{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-dim);}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
 
-  /* HOW IT WORKS */
-  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:64px;}
-  .how-steps{display:flex;flex-direction:column;gap:32px;}
-  .step{display:flex;gap:20px;align-items:flex-start;}
-  .step-num{width:36px;height:36px;border-radius:50%;background:#3B82F6;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-  .step-content h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:6px;}
-  .step-content p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6;}
-  .how-visual{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;}
-  .mock-header{display:flex;align-items:center;gap:8px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
-  .mock-dot{width:8px;height:8px;border-radius:50%;}
-  .mock-title{font-size:13px;color:rgba(255,255,255,0.4);margin-left:4px;}
-  .contract-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px;margin-bottom:12px;}
-  .contract-card:last-child{margin-bottom:0;}
-  .cc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
-  .cc-title{font-size:13px;font-weight:600;color:#E8EDF5;line-height:1.4;}
-  .cc-badge{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;flex-shrink:0;margin-left:8px;}
-  .badge-fed{background:rgba(59,130,246,0.15);color:#93C5FD;}
-  .badge-state{background:rgba(16,185,129,0.15);color:#6EE7B7;}
-  .cc-agency{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:10px;}
-  .cc-meta{display:flex;gap:12px;}
-  .cc-meta span{font-size:11px;color:rgba(255,255,255,0.3);}
-  .cc-meta strong{color:rgba(255,255,255,0.6);}
+/* ── STATS ── */
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{text-align:center;padding:36px 20px;border-right:1px solid var(--border);position:relative;}
+.stat:last-child{border-right:none;}
+.stat-num{font-size:42px;font-weight:900;letter-spacing:-1.5px;line-height:1;}
+.stat-num.blue{color:var(--blue);}
+.stat-num.teal{color:var(--teal);}
+.stat-num.green{color:var(--green);}
+.stat-num.amber{color:var(--amber);}
+.stat-label{font-size:12px;color:var(--text-dim);margin-top:6px;line-height:1.4;}
 
-  /* WHY */
-  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:64px;}
-  .why-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:28px;}
-  .why-icon{width:44px;height:44px;border-radius:10px;background:rgba(59,130,246,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
-  .why-icon svg{width:22px;height:22px;stroke:#3B82F6;fill:none;stroke-width:1.8;}
-  .why-card h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:10px;}
-  .why-card p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6;}
+/* ── HOW ── */
+.how{padding:120px 0;background:var(--surface);}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:64px;}
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{display:flex;gap:0;position:relative;}
+.step-left{display:flex;flex-direction:column;align-items:center;margin-right:24px;}
+.step-circle{width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.step-line{width:2px;flex:1;background:rgba(59,130,246,0.2);margin:4px 0;min-height:32px;}
+.step:last-child .step-line{display:none;}
+.step-body{padding:4px 0 36px;}
+.step-body h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.step-body p{font-size:14px;color:var(--text-dim);line-height:1.6;}
+.mock-inbox{background:var(--surface2);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.mock-bar{background:var(--surface3);padding:14px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.mock-dots{display:flex;gap:6px;}
+.mock-dot{width:10px;height:10px;border-radius:50%;}
+.mock-subject{font-size:12px;color:var(--text-dim);margin-left:8px;}
+.inbox-header{padding:16px 20px;border-bottom:1px solid var(--border);}
+.inbox-from{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px;}
+.inbox-date{font-size:11px;color:var(--text-dim);}
+.inbox-body{padding:16px 20px;}
+.inbox-greeting{font-size:13px;color:var(--text-mid);margin-bottom:16px;}
+.contract-item{background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.contract-item:last-child{margin-bottom:0;}
+.ci-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.ci-title{font-size:12px;font-weight:600;color:#E2E8F4;line-height:1.4;flex:1;}
+.ci-badge{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600;flex-shrink:0;white-space:nowrap;}
+.fed{background:rgba(59,130,246,0.15);color:#93C5FD;}
+.state{background:rgba(16,185,129,0.15);color:#6EE7B7;}
+.local{background:rgba(245,158,11,0.15);color:#FCD34D;}
+.ci-agency{font-size:11px;color:var(--text-dim);margin-bottom:8px;}
+.ci-meta{display:flex;gap:14px;}
+.ci-meta span{font-size:10px;color:rgba(255,255,255,0.35);}
+.ci-meta strong{color:rgba(255,255,255,0.6);}
 
-  /* INDUSTRIES */
-  .industries{background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
-  .ind-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,0.06);margin-top:48px;border-radius:12px;overflow:hidden;}
-  .ind-item{background:#0A0E1A;padding:20px;font-size:13px;color:rgba(255,255,255,0.5);font-weight:500;}
-  .ind-item:hover{background:rgba(59,130,246,0.06);color:#93C5FD;}
+/* ── WHY ── */
+.why{padding:120px 0;}
+.why-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;margin-top:64px;}
+.why-cards{display:flex;flex-direction:column;gap:16px;}
+.why-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color 0.2s;}
+.why-card:hover{border-color:var(--border2);}
+.why-card-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.why-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.icon-blue{background:rgba(59,130,246,0.12);}
+.icon-green{background:rgba(16,185,129,0.12);}
+.icon-teal{background:rgba(14,165,233,0.12);}
+.icon-amber{background:rgba(245,158,11,0.12);}
+.icon-purple{background:rgba(139,92,246,0.12);}
+.icon-red{background:rgba(239,68,68,0.12);}
+.why-card h3{font-size:15px;font-weight:700;color:#fff;}
+.why-card p{font-size:13px;color:var(--text-dim);line-height:1.6;}
+.money-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:sticky;top:100px;}
+.money-panel-header{background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(14,165,233,0.1));padding:20px 24px;border-bottom:1px solid var(--border);}
+.money-panel-header h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;}
+.money-panel-header p{font-size:12px;color:var(--text-dim);}
+.money-table{width:100%;}
+.money-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border);}
+.money-row:last-child{border-bottom:none;}
+.money-cell{padding:14px 20px;font-size:13px;}
+.money-industry{color:var(--text-mid);font-weight:500;}
+.money-value{font-weight:700;color:var(--green);text-align:right;}
+.money-sub{font-size:11px;color:var(--text-dim);font-weight:400;}
+.compound-box{margin:0;background:rgba(16,185,129,0.06);border-top:1px solid rgba(16,185,129,0.15);padding:16px 20px;}
+.compound-box p{font-size:12px;color:rgba(16,185,129,0.8);line-height:1.6;}
+.compound-box strong{color:var(--green);}
 
-  /* PRICING */
-  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;}
-  .price-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;position:relative;}
-  .price-card.featured{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.4);}
-  .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#3B82F6;color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:100px;letter-spacing:0.5px;text-transform:uppercase;}
-  .price-tier{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px;}
-  .price-amt{font-size:48px;font-weight:800;color:#fff;letter-spacing:-2px;line-height:1;}
-  .price-amt sup{font-size:22px;font-weight:600;vertical-align:super;letter-spacing:0;}
-  .price-amt sub{font-size:14px;font-weight:400;color:rgba(255,255,255,0.4);letter-spacing:0;}
-  .price-desc{font-size:14px;color:rgba(255,255,255,0.4);margin:12px 0 24px;line-height:1.5;}
-  .price-divider{height:1px;background:rgba(255,255,255,0.07);margin-bottom:24px;}
-  .price-features{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
-  .pf{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,0.6);}
-  .pf-check{width:18px;height:18px;border-radius:50%;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-  .pf-check svg{width:10px;height:10px;stroke:#3B82F6;fill:none;stroke-width:2.5;}
-  .price-btn{width:100%;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;cursor:pointer;border:none;transition:all 0.2s;}
-  .price-btn-outline{background:transparent;color:#3B82F6;border:1px solid rgba(59,130,246,0.4);}
-  .price-btn-outline:hover{background:rgba(59,130,246,0.1);}
-  .price-btn-solid{background:#3B82F6;color:#fff;}
-  .price-btn-solid:hover{background:#2563EB;}
+/* ── CHART SECTION ── */
+.charts{padding:100px 0;background:var(--surface);border-top:1px solid var(--border);}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:64px;}
+.chart-card{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:28px;}
+.chart-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;}
+.chart-card .chart-sub{font-size:12px;color:var(--text-dim);margin-bottom:24px;}
+.bar-chart{display:flex;flex-direction:column;gap:14px;}
+.bar-row{display:flex;align-items:center;gap:12px;}
+.bar-label{font-size:12px;color:var(--text-mid);width:100px;flex-shrink:0;text-align:right;}
+.bar-track{flex:1;height:28px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:11px;font-weight:700;color:#fff;transition:width 1s ease;}
+.bar-blue{background:linear-gradient(90deg,#1D4ED8,#3B82F6);}
+.bar-teal{background:linear-gradient(90deg,#0284C7,#0EA5E9);}
+.bar-green{background:linear-gradient(90deg,#059669,#10B981);}
+.bar-amber{background:linear-gradient(90deg,#D97706,#F59E0B);}
+.bar-purple{background:linear-gradient(90deg,#7C3AED,#8B5CF6);}
+.pie-area{display:flex;align-items:center;gap:28px;}
+.pie-svg{flex-shrink:0;}
+.pie-legend{display:flex;flex-direction:column;gap:10px;}
+.pie-item{display:flex;align-items:center;gap:10px;font-size:12px;}
+.pie-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.pie-item-label{color:var(--text-mid);}
+.pie-item-val{font-weight:700;color:#fff;margin-left:auto;}
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:flex;gap:16px;align-items:flex-start;}
+.tl-left{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.tl-line{width:2px;flex:1;min-height:28px;background:var(--border);margin:4px 0;}
+.tl-item:last-child .tl-line{display:none;}
+.tl-content{padding-bottom:20px;}
+.tl-year{font-size:11px;font-weight:700;color:var(--text-dim);margin-bottom:3px;}
+.tl-text{font-size:13px;color:var(--text-mid);}
+.tl-text strong{color:#fff;}
+.win-rate{display:flex;flex-direction:column;gap:16px;}
+.wr-item{display:flex;flex-direction:column;gap:6px;}
+.wr-label{display:flex;justify-content:space-between;font-size:12px;}
+.wr-name{color:var(--text-mid);}
+.wr-pct{font-weight:700;color:#fff;}
+.wr-track{height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;}
+.wr-fill{height:100%;border-radius:4px;}
 
-  /* GUIDE SECTION */
-  .guide-inner{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-  .guide-points{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
-  .gp{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,0.6);}
-  .gp-bullet{width:20px;height:20px;border-radius:50%;background:rgba(59,130,246,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .gp-bullet svg{width:10px;height:10px;stroke:#3B82F6;fill:none;stroke-width:2.5;}
-  .guide-pages{display:flex;flex-direction:column;gap:12px;}
-  .guide-page{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;}
-  .page-num{font-size:11px;font-weight:600;color:#3B82F6;background:rgba(59,130,246,0.12);padding:3px 8px;border-radius:5px;flex-shrink:0;}
-  .page-title{font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;}
+/* ── GUIDE ── */
+.guide{padding:120px 0;}
+.guide-inner{background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;}
+.guide-top{background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(59,130,246,0.06));padding:56px 56px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;border-bottom:1px solid var(--border);}
+.guide-heading{font-size:clamp(24px,2.5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.8px;line-height:1.2;margin-bottom:16px;}
+.guide-desc{font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:28px;}
+.guide-checklist{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.gc{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-mid);}
+.gc-check{width:20px;height:20px;border-radius:50%;background:rgba(14,165,233,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gc svg{width:10px;height:10px;stroke:var(--teal);fill:none;stroke-width:2.5;}
+.guide-phases{display:flex;flex-direction:column;gap:12px;}
+.gp{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:border-color 0.2s;}
+.gp:hover{border-color:rgba(14,165,233,0.3);}
+.gp-tag{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--teal);background:rgba(14,165,233,0.1);padding:3px 10px;border-radius:6px;white-space:nowrap;}
+.gp-title{font-size:13px;color:var(--text-mid);font-weight:500;}
+.guide-download{background:var(--surface2);padding:32px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.gd-text h4{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+.gd-text p{font-size:13px;color:var(--text-dim);}
 
-  /* CTA */
-  .cta-section{background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(59,130,246,0.04));border:1px solid rgba(59,130,246,0.2);border-radius:24px;padding:72px;text-align:center;}
-  .cta-section h2{font-size:clamp(28px,3vw,46px);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:16px;}
-  .cta-section p{font-size:17px;color:rgba(255,255,255,0.5);margin-bottom:40px;}
-  .cta-emails{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
-  .cta-email-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px 28px;text-align:left;}
-  .cta-email-role{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px;}
-  .cta-email-addr{font-size:15px;font-weight:600;color:#3B82F6;}
-  .cta-email-name{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;}
+/* ── INDUSTRIES ── */
+.industries{padding:100px 0;background:var(--surface);border-top:1px solid var(--border);}
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));background:var(--border);gap:1px;margin-top:48px;border-radius:14px;overflow:hidden;}
+.ind-item{background:var(--surface);padding:18px 16px;font-size:13px;color:var(--text-dim);font-weight:500;transition:all 0.2s;cursor:default;}
+.ind-item:hover{background:rgba(59,130,246,0.07);color:#93C5FD;}
 
-  /* FOOTER */
-  footer{padding:40px 0;border-top:1px solid rgba(255,255,255,0.06);text-align:center;}
-  footer p{font-size:13px;color:rgba(255,255,255,0.25);}
+/* ── PRICING ── */
+.pricing{padding:120px 0;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:32px;position:relative;transition:border-color 0.2s;}
+.price-card:hover{border-color:var(--border2);}
+.price-card.featured{background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.35);}
+.pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:4px 16px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+.p-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;}
+.p-price{display:flex;align-items:flex-start;gap:2px;margin-bottom:8px;}
+.p-dollar{font-size:22px;font-weight:700;color:#fff;margin-top:6px;}
+.p-num{font-size:52px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;}
+.p-period{font-size:14px;color:var(--text-dim);align-self:flex-end;margin-bottom:8px;}
+.p-desc{font-size:13px;color:var(--text-dim);line-height:1.6;margin-bottom:24px;min-height:44px;}
+.p-divider{height:1px;background:var(--border);margin-bottom:24px;}
+.p-features{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
+.pf{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-mid);}
+.pf-icon{width:18px;height:18px;border-radius:50%;background:rgba(59,130,246,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.pf-icon svg{width:9px;height:9px;stroke:var(--blue);fill:none;stroke-width:2.5;}
+.p-btn{width:100%;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-align:center;cursor:pointer;transition:all 0.2s;display:block;}
+.p-btn-outline{background:transparent;color:var(--blue);border:1px solid rgba(59,130,246,0.35);}
+.p-btn-outline:hover{background:rgba(59,130,246,0.08);}
+.p-btn-solid{background:var(--blue);color:#fff;border:none;}
+.p-btn-solid:hover{background:var(--blue-dark);}
 
-  @media(max-width:768px){
-    .nav-links{display:none;}
-    .how-grid{grid-template-columns:1fr;}
-    .pricing-grid{grid-template-columns:1fr;}
-    .guide-inner{grid-template-columns:1fr;padding:32px;}
-    .cta-section{padding:40px 24px;}
-    .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);}
-  }
+/* ── SIGNUP FORM ── */
+.signup{padding:120px 0;background:var(--surface);border-top:1px solid var(--border);}
+.signup-inner{max-width:680px;margin:0 auto;text-align:center;}
+.signup-inner .section-title{margin-bottom:12px;}
+.signup-inner .section-sub{margin:0 auto 48px;}
+.form-card{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:40px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.form-group label{font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text-mid);text-transform:uppercase;}
+.form-group input,.form-group select,.form-group textarea{background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;color:#fff;outline:none;transition:border-color 0.2s;font-family:inherit;width:100%;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(59,130,246,0.5);}
+.form-group select option{background:#1A2235;}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-submit{background:var(--blue);color:#fff;width:100%;padding:15px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.form-submit:hover{background:var(--blue-dark);}
+.form-note{font-size:12px;color:var(--text-dim);margin-top:16px;line-height:1.6;}
+.form-note a{color:var(--blue-light);}
+
+/* ── CTA ── */
+.cta{padding:120px 0;}
+.cta-box{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(14,165,233,0.06));border:1px solid rgba(59,130,246,0.2);border-radius:24px;padding:80px;text-align:center;}
+.cta-box h2{font-size:clamp(28px,3vw,48px);font-weight:900;color:#fff;letter-spacing:-1.2px;margin-bottom:16px;}
+.cta-box p{font-size:17px;color:var(--text-dim);margin-bottom:44px;max-width:500px;margin-left:auto;margin-right:auto;}
+.contact-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:48px;}
+.contact-card{background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:14px;padding:22px 32px;text-align:left;}
+.cc-role{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;}
+.cc-email{font-size:15px;font-weight:700;color:var(--blue-light);}
+.cc-name{font-size:13px;color:var(--text-dim);margin-top:4px;}
+
+/* ── FOOTER ── */
+footer{padding:40px 0;border-top:1px solid var(--border);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-size:16px;font-weight:800;color:#fff;letter-spacing:0.5px;}
+.footer-logo span{color:var(--blue);}
+footer p{font-size:13px;color:var(--text-dim);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .how-grid,.why-layout,.charts-grid,.guide-top,.pricing-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .cta-box{padding:48px 28px;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .stat{border-right:none;border-bottom:1px solid var(--border);}
+  .guide-download{flex-direction:column;}
+  .guide-top{padding:32px;}
+  .nav-inner{padding:16px 20px;}
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <div class="logo">BOUND<span>CS</span></div>
+    <div class="logo">BOUND<span>CS</span><small>Contracting Services</small></div>
     <div class="nav-links">
       <a href="#how">How It Works</a>
       <a href="#why">Why Bid</a>
-      <a href="#pricing">Pricing</a>
       <a href="#guide">Free Guide</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#signup">Get Started</a>
     </div>
-    <a href="mailto:sales@boundcs.com" class="nav-cta">Get Started</a>
+    <div class="nav-actions">
+      <a href="#signup" class="nav-cta">Get Started</a>
+    </div>
   </div>
 </nav>
-
-<main>
 
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Federal · State · Local Contract Intelligence
-    </div>
-    <h1>Your next government<br>contract is already <span>posted.</span></h1>
-    <p>BCS delivers daily, matched government contract opportunities directly to your inbox — federal, state, and local — filtered to your industry and location.</p>
+    <div class="hero-badge"><span class="pulse"></span>Federal · State · Local — All 50 States</div>
+    <h1>Your next government<br>contract is already<br><span class="line2">posted right now.</span></h1>
+    <p class="hero-sub">BCS delivers daily matched government contract opportunities to your inbox — filtered to your exact industry and location. Federal, state, and local.</p>
     <div class="hero-actions">
-      <a href="mailto:sales@boundcs.com" class="btn-primary">Start Getting Bids →</a>
-      <a href="#why" class="btn-ghost">Why Government Contracts?</a>
+      <a href="#signup" class="btn-primary">Start Getting Bids →</a>
+      <a href="#guide" class="btn-ghost">Get the Free Guide</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-dot"></span>No long-term contracts</div>
+      <div class="trust-item"><span class="trust-dot"></span>Cancel anytime</div>
+      <div class="trust-item"><span class="trust-dot"></span>Starting at $25/mo</div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats">
+<div class="stats-bar">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-num">$163B+</div>
-        <div class="stat-label">Awarded to small businesses last year</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">23%</div>
-        <div class="stat-label">Of federal spending must go to small business</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">90K+</div>
-        <div class="stat-label">New contracts posted every month</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">$1.5T</div>
-        <div class="stat-label">Total state & local market annually</div>
-      </div>
+      <div class="stat"><div class="stat-num blue">$163B+</div><div class="stat-label">Awarded to small businesses<br>in federal contracts last year</div></div>
+      <div class="stat"><div class="stat-num green">23%</div><div class="stat-label">Of all federal spending<br>must go to small business by law</div></div>
+      <div class="stat"><div class="stat-num teal">90K+</div><div class="stat-label">New contracts posted<br>every single month</div></div>
+      <div class="stat"><div class="stat-num amber">$1.5T</div><div class="stat-label">Total state & local<br>government market annually</div></div>
     </div>
   </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<section id="how">
+<section class="how" id="how">
   <div class="container">
-    <div class="section-tag">How It Works</div>
+    <div class="tag">How It Works</div>
     <div class="section-title">Set it up once.<br>Get contracts every morning.</div>
     <div class="how-grid">
-      <div class="how-steps">
+      <div class="steps">
         <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Tell us your industry & location</h3>
-            <p>Select your NAICS codes — landscaping, construction, IT, security, whatever your business does — and the states or cities you operate in.</p>
-          </div>
+          <div class="step-left"><div class="step-circle">1</div><div class="step-line"></div></div>
+          <div class="step-body"><h3>Tell us your industry & location</h3><p>Select your NAICS industry codes — landscaping, construction, IT, security, trucking, whatever your business does — and the states or cities you operate in.</p></div>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>We scrape everything, daily</h3>
-            <p>BCS pulls from SAM.gov, all 50 state portals, and local government procurement systems every single day.</p>
-          </div>
+          <div class="step-left"><div class="step-circle">2</div><div class="step-line"></div></div>
+          <div class="step-body"><h3>We scrape everything, every day</h3><p>BCS pulls from SAM.gov, all 50 state portals, and local government procurement systems every single morning — thousands of contracts daily.</p></div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>You get matched contracts in your inbox</h3>
-            <p>Every morning, you receive only the contracts that match your exact profile. No noise, no irrelevant results — just opportunities.</p>
-          </div>
+          <div class="step-left"><div class="step-circle">3</div><div class="step-line"></div></div>
+          <div class="step-body"><h3>Only new matches hit your inbox</h3><p>Every morning you receive only contracts that match your profile and that you haven't seen before. No repeats, no noise — just fresh opportunities.</p></div>
         </div>
         <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <h3>Click, read, and bid</h3>
-            <p>Each contract links directly to the official posting. No middleman, no paywalled documents. You bid directly with the government.</p>
-          </div>
+          <div class="step-left"><div class="step-circle">4</div></div>
+          <div class="step-body"><h3>Click, read, and bid</h3><p>Each contract links directly to the official government posting. No paywalls, no middlemen — you bid directly with the agency.</p></div>
         </div>
       </div>
-      <div class="how-visual">
-        <div class="mock-header">
-          <div class="mock-dot" style="background:#FF5F57;"></div>
-          <div class="mock-dot" style="background:#FFBD2E;"></div>
-          <div class="mock-dot" style="background:#28CA41;"></div>
-          <span class="mock-title">Today's Matched Contracts — March 15, 2026</span>
+      <div class="mock-inbox">
+        <div class="mock-bar">
+          <div class="mock-dots"><div class="mock-dot" style="background:#FF5F57;"></div><div class="mock-dot" style="background:#FEBC2E;"></div><div class="mock-dot" style="background:#28C840;"></div></div>
+          <span class="mock-subject">📬 Daily Contract Digest — March 15, 2026</span>
         </div>
-        <div class="contract-card">
-          <div class="cc-top">
-            <div class="cc-title">Grounds Maintenance Services — Fort Myers Federal Complex</div>
-            <span class="cc-badge badge-fed">Federal</span>
-          </div>
-          <div class="cc-agency">Dept. of General Services · Florida</div>
-          <div class="cc-meta">
-            <span>Due <strong>Apr 12</strong></span>
-            <span>Est. <strong>$280K/yr</strong></span>
-            <span>Set-aside: <strong>SB</strong></span>
-          </div>
+        <div class="inbox-header">
+          <div class="inbox-from">BCS · bids@boundcs.com</div>
+          <div class="inbox-date">Today at 7:02 AM · 34 new matched contracts</div>
         </div>
-        <div class="contract-card">
-          <div class="cc-top">
-            <div class="cc-title">HVAC Maintenance Contract — Hillsborough County Facilities</div>
-            <span class="cc-badge badge-state">State/Local</span>
+        <div class="inbox-body">
+          <div class="inbox-greeting">Good morning — here are today's matched contracts for your industries in Florida:</div>
+          <div class="contract-item">
+            <div class="ci-header"><div class="ci-title">Grounds Maintenance — Fort Myers Federal Complex</div><span class="ci-badge fed">Federal</span></div>
+            <div class="ci-agency">Dept. of General Services · Fort Myers, FL</div>
+            <div class="ci-meta"><span>Due <strong>Apr 12</strong></span><span>Est. <strong>$280K/yr</strong></span><span><strong>Small Business</strong></span></div>
           </div>
-          <div class="cc-agency">Hillsborough County · Florida</div>
-          <div class="cc-meta">
-            <span>Due <strong>Apr 28</strong></span>
-            <span>Est. <strong>$420K/yr</strong></span>
-            <span>Multi-year</span>
+          <div class="contract-item">
+            <div class="ci-header"><div class="ci-title">HVAC Maintenance — Hillsborough County Facilities</div><span class="ci-badge state">State/Local</span></div>
+            <div class="ci-agency">Hillsborough County · Tampa, FL</div>
+            <div class="ci-meta"><span>Due <strong>Apr 28</strong></span><span>Est. <strong>$420K/yr</strong></span><span><strong>Multi-year</strong></span></div>
           </div>
-        </div>
-        <div class="contract-card">
-          <div class="cc-top">
-            <div class="cc-title">Janitorial Services — Miami-Dade Government Center</div>
-            <span class="cc-badge badge-state">State/Local</span>
-          </div>
-          <div class="cc-agency">Miami-Dade County · Florida</div>
-          <div class="cc-meta">
-            <span>Due <strong>May 3</strong></span>
-            <span>Est. <strong>$650K/yr</strong></span>
-            <span>Open competition</span>
+          <div class="contract-item">
+            <div class="ci-header"><div class="ci-title">Janitorial Services — Miami-Dade Gov. Center</div><span class="ci-badge local">Local</span></div>
+            <div class="ci-agency">Miami-Dade County · Miami, FL</div>
+            <div class="ci-meta"><span>Due <strong>May 3</strong></span><span>Est. <strong>$650K/yr</strong></span><span><strong>Open</strong></span></div>
           </div>
         </div>
       </div>
@@ -282,54 +389,175 @@
   </div>
 </section>
 
-<!-- WHY GOVERNMENT CONTRACTS -->
-<section id="why" style="background:rgba(255,255,255,0.015);border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+<!-- WHY -->
+<section class="why" id="why">
   <div class="container">
-    <div class="section-tag">Why Government Contracts</div>
+    <div class="tag">Why Government Contracts</div>
     <div class="section-title">The most overlooked revenue<br>channel for small businesses.</div>
-    <p class="section-sub">Most of your competitors are not bidding. That's your advantage — right now, before the market in your area gets crowded.</p>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <p class="section-sub">Most of your competitors aren't bidding. That gap is your opportunity — right now, before it closes.</p>
+    <div class="why-layout">
+      <div class="why-cards">
+        <div class="why-card">
+          <div class="why-card-header">
+            <div class="why-icon icon-blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <h3>Set-asides cut your competition</h3>
+          </div>
+          <p>Contracts reserved for small businesses legally exclude large corporations. You compete against companies your size — not billion-dollar players with 50-person BD teams.</p>
         </div>
-        <h3>Set-asides cut your competition</h3>
-        <p>Contracts reserved for small businesses exclude large corporations entirely. You're competing against companies your size — not billion-dollar players.</p>
+        <div class="why-card">
+          <div class="why-card-header">
+            <div class="why-icon icon-green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h3>Government always pays on time</h3>
+          </div>
+          <p>Fixed Net-30 or Net-60 on every contract. No chasing invoices, no clients going silent, no bad debt. Predictable cash flow you can actually plan around.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-header">
+            <div class="why-icon icon-teal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="1.8"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+            <h3>Contracts compound over time</h3>
+          </div>
+          <p>Win one contract, perform well, and renewals become easy. Past performance is the single biggest factor in winning future bids. One win leads to five more.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-header">
+            <div class="why-icon icon-amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+            <h3>Certifications open exclusive doors</h3>
+          </div>
+          <p>Veteran-owned, woman-owned, minority-owned, and 8(a) certifications unlock contracts with near-zero competition. Free to apply for — most contractors never bother.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-header">
+            <div class="why-icon icon-purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Agencies are required to find you</h3>
+          </div>
+          <p>Federal agencies have legally mandated small business spending targets. Contracting officers are actively hunting for qualified small vendors to meet those goals.</p>
+        </div>
       </div>
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="money-panel">
+        <div class="money-panel-header">
+          <h3>What your industry earns on government contracts</h3>
+          <p>Typical annual contract values by trade</p>
         </div>
-        <h3>Government always pays</h3>
-        <p>Fixed Net-30 or Net-60 payment terms on every contract. No chasing invoices, no clients going silent, no bad debt. Predictable cash flow.</p>
+        <div class="money-table">
+          <div class="money-row"><div class="money-cell money-industry">Landscaping</div><div class="money-cell money-value">$80K – $400K <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Janitorial</div><div class="money-cell money-value">$120K – $800K <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Construction</div><div class="money-cell money-value">$200K – $5M+ <span class="money-sub">per contract</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">HVAC / Plumbing</div><div class="money-cell money-value">$150K – $1.2M <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Security</div><div class="money-cell money-value">$300K – $2M <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">IT Services</div><div class="money-cell money-value">$100K – $5M+ <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Trucking</div><div class="money-cell money-value">$80K – $600K <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Food Service</div><div class="money-cell money-value">$200K – $1.5M <span class="money-sub">per year</span></div></div>
+          <div class="money-row"><div class="money-cell money-industry">Staffing</div><div class="money-cell money-value">$500K – $3M <span class="money-sub">per year</span></div></div>
+        </div>
+        <div class="compound-box">
+          <p>A $300K landscaping contract renewing for 5 years = <strong>$1.5M from one bid.</strong> Government contracts are multi-year by design.</p>
+        </div>
       </div>
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="charts" id="data">
+  <div class="container">
+    <div class="tag">By The Numbers</div>
+    <div class="section-title">The data behind<br>the opportunity.</div>
+    <div class="charts-grid">
+
+      <div class="chart-card">
+        <h3>Federal small business spending by industry</h3>
+        <div class="chart-sub">Annual federal contract awards to small businesses (billions)</div>
+        <div class="bar-chart">
+          <div class="bar-row"><div class="bar-label">Construction</div><div class="bar-track"><div class="bar-fill bar-blue" style="width:85%">$28.4B</div></div></div>
+          <div class="bar-row"><div class="bar-label">IT Services</div><div class="bar-track"><div class="bar-fill bar-teal" style="width:72%">$24.1B</div></div></div>
+          <div class="bar-row"><div class="bar-label">Professional</div><div class="bar-track"><div class="bar-fill bar-green" style="width:60%">$20.2B</div></div></div>
+          <div class="bar-row"><div class="bar-label">Facilities</div><div class="bar-track"><div class="bar-fill bar-amber" style="width:45%">$15.1B</div></div></div>
+          <div class="bar-row"><div class="bar-label">Logistics</div><div class="bar-track"><div class="bar-fill bar-purple" style="width:32%">$10.7B</div></div></div>
         </div>
-        <h3>Contracts renew for years</h3>
-        <p>Win one $300K landscaping contract, renew it 5 years = $1.5M from a single bid. Government contracts are multi-year by design.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+
+      <div class="chart-card">
+        <h3>Contract sources BCS monitors</h3>
+        <div class="chart-sub">Breakdown of where your daily contracts come from</div>
+        <div class="pie-area">
+          <svg class="pie-svg" width="130" height="130" viewBox="0 0 130 130">
+            <circle cx="65" cy="65" r="50" fill="none" stroke="#1D4ED8" stroke-width="28" stroke-dasharray="157 157" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+            <circle cx="65" cy="65" r="50" fill="none" stroke="#0EA5E9" stroke-width="28" stroke-dasharray="94 220" stroke-dashoffset="-157" transform="rotate(-90 65 65)"/>
+            <circle cx="65" cy="65" r="50" fill="none" stroke="#10B981" stroke-width="28" stroke-dasharray="63 251" stroke-dashoffset="-251" transform="rotate(-90 65 65)"/>
+            <circle cx="65" cy="65" r="22" fill="#111827"/>
+            <text x="65" y="60" text-anchor="middle" fill="white" font-size="11" font-weight="700">3</text>
+            <text x="65" y="74" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9">sources</text>
+          </svg>
+          <div class="pie-legend">
+            <div class="pie-item"><div class="pie-dot" style="background:#1D4ED8;"></div><span class="pie-item-label">Federal (SAM.gov)</span><span class="pie-item-val">50%</span></div>
+            <div class="pie-item"><div class="pie-dot" style="background:#0EA5E9;"></div><span class="pie-item-label">State portals</span><span class="pie-item-val">30%</span></div>
+            <div class="pie-item"><div class="pie-dot" style="background:#10B981;"></div><span class="pie-item-label">City & County</span><span class="pie-item-val">20%</span></div>
+          </div>
         </div>
-        <h3>Agencies need to find you</h3>
-        <p>Federal agencies have legally mandated small business spending targets. Contracting officers are actively searching for qualified small vendors.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+
+      <div class="chart-card">
+        <h3>Your path to first contract</h3>
+        <div class="chart-sub">Typical timeline from setup to first award</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:var(--blue);"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">Day 1</div><div class="tl-text"><strong>Register on SAM.gov</strong> and your state portal. Free, takes 1–2 hours.</div></div></div>
+          <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:var(--teal);"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">Day 2</div><div class="tl-text"><strong>Subscribe to BCS.</strong> Receive your first matched contract digest the next morning.</div></div></div>
+          <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:var(--green);"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">Week 1–2</div><div class="tl-text"><strong>Find a local contract</strong> that matches your existing work. Read the solicitation.</div></div></div>
+          <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:var(--amber);"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-year">Week 3–4</div><div class="tl-text"><strong>Submit your first bid.</strong> Price it using SAM.gov past award data.</div></div></div>
+          <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#8B5CF6;"></div></div><div class="tl-content"><div class="tl-year">Month 2+</div><div class="tl-text"><strong>First award.</strong> One contract becomes the foundation for everything that follows.</div></div></div>
         </div>
-        <h3>Build a compounding reputation</h3>
-        <p>Past performance is the #1 factor in winning future contracts. One win leads to renewals, extensions, and referrals to other contracting officers.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+      <div class="chart-card">
+        <h3>Win rate by experience level</h3>
+        <div class="chart-sub">Average bid win rates for small business contractors</div>
+        <div class="win-rate">
+          <div class="wr-item"><div class="wr-label"><span class="wr-name">First-time bidders (set-aside)</span><span class="wr-pct">18%</span></div><div class="wr-track"><div class="wr-fill bar-blue" style="width:18%;height:100%;border-radius:4px;"></div></div></div>
+          <div class="wr-item"><div class="wr-label"><span class="wr-name">1–3 past contracts</span><span class="wr-pct">26%</span></div><div class="wr-track"><div class="wr-fill bar-teal" style="width:26%;height:100%;border-radius:4px;"></div></div></div>
+          <div class="wr-item"><div class="wr-label"><span class="wr-name">3–10 past contracts</span><span class="wr-pct">38%</span></div><div class="wr-track"><div class="wr-fill bar-green" style="width:38%;height:100%;border-radius:4px;"></div></div></div>
+          <div class="wr-item"><div class="wr-label"><span class="wr-name">10+ past contracts</span><span class="wr-pct">52%</span></div><div class="wr-track"><div class="wr-fill bar-amber" style="width:52%;height:100%;border-radius:4px;"></div></div></div>
+          <div class="wr-item"><div class="wr-label"><span class="wr-name">8(a) certified businesses</span><span class="wr-pct">71%</span></div><div class="wr-track"><div class="wr-fill bar-purple" style="width:71%;height:100%;border-radius:4px;"></div></div></div>
         </div>
-        <h3>Certifications open exclusive lanes</h3>
-        <p>Veteran-owned, woman-owned, minority-owned, and 8(a) certifications unlock contracts with near-zero competition. Free to apply for.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FREE GUIDE -->
+<section class="guide" id="guide">
+  <div class="container">
+    <div class="tag">Free Resource</div>
+    <div class="section-title">The Complete Bidding Playbook.</div>
+    <div class="guide-inner">
+      <div class="guide-top">
+        <div>
+          <div class="guide-heading">Everything you need to go from zero to your first government contract.</div>
+          <p class="guide-desc">A complete start-to-finish guide built for small business owners who have never bid on a government contract before — and want to do it right the first time.</p>
+          <div class="guide-checklist">
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Full 24-step checklist from EIN to first bid</div>
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Real contract value ranges by industry</div>
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>SAM.gov + state portal registration walkthrough</div>
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Every certification explained (8a, SDVOSB, WOSB, HUBZone)</div>
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>How to read, price, and submit a winning bid</div>
+            <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Complete glossary of bidding terms</div>
+          </div>
+          <a href="mailto:sales@boundcs.com?subject=Free Bidding Guide Request" class="btn-teal">Get the Free Guide →</a>
+        </div>
+        <div class="guide-phases">
+          <div class="gp"><span class="gp-tag">Phase 1</span><span class="gp-title">Business & legal foundation</span></div>
+          <div class="gp"><span class="gp-tag">Phase 2</span><span class="gp-title">Federal, state & local registration</span></div>
+          <div class="gp"><span class="gp-tag">Phase 3</span><span class="gp-title">Certifications that unlock set-asides</span></div>
+          <div class="gp"><span class="gp-tag">Phase 4</span><span class="gp-title">How to read, price & submit a bid</span></div>
+          <div class="gp"><span class="gp-tag">Phase 5</span><span class="gp-title">Tips, glossary & common mistakes</span></div>
+        </div>
+      </div>
+      <div class="guide-download">
+        <div class="gd-text">
+          <h4>Ready to get started?</h4>
+          <p>Email us and we'll send the full guide directly to your inbox — free, no strings attached.</p>
+        </div>
+        <a href="mailto:sales@boundcs.com?subject=Free Bidding Guide Request" class="btn-teal">Email for Free Guide →</a>
       </div>
     </div>
   </div>
@@ -338,7 +566,7 @@
 <!-- INDUSTRIES -->
 <section class="industries">
   <div class="container">
-    <div class="section-tag">Industries We Cover</div>
+    <div class="tag">Industries Covered</div>
     <div class="section-title">If the government buys it,<br>we track it.</div>
     <div class="ind-grid">
       <div class="ind-item">Landscaping & Grounds</div>
@@ -348,135 +576,237 @@
       <div class="ind-item">Electrical</div>
       <div class="ind-item">Roofing & Siding</div>
       <div class="ind-item">IT & Software</div>
-      <div class="ind-item">Security Services</div>
+      <div class="ind-item">Cybersecurity</div>
+      <div class="ind-item">Security Guards</div>
       <div class="ind-item">Trucking & Freight</div>
       <div class="ind-item">Staffing & HR</div>
       <div class="ind-item">Food Service</div>
       <div class="ind-item">Equipment Repair</div>
       <div class="ind-item">Environmental</div>
       <div class="ind-item">Property Management</div>
-      <div class="ind-item">Printing</div>
+      <div class="ind-item">Masonry & Concrete</div>
+      <div class="ind-item">Painting & Drywall</div>
+      <div class="ind-item">Flooring</div>
+      <div class="ind-item">Pest Control</div>
+      <div class="ind-item">Printing & Signage</div>
+      <div class="ind-item">Waste Management</div>
       <div class="ind-item">And many more...</div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="pricing">
+<section class="pricing" id="pricing">
   <div class="container">
-    <div class="section-tag">Pricing</div>
-    <div class="section-title">Simple, transparent pricing.</div>
-    <p class="section-sub">No setup fees. No long-term contracts. Email us to subscribe.</p>
+    <div class="tag">Pricing</div>
+    <div class="section-title">Simple, transparent pricing.<br>No hidden fees.</div>
+    <p class="section-sub">Email sales@boundcs.com to subscribe or ask questions. Cancel anytime.</p>
     <div class="pricing-grid">
 
       <div class="price-card">
-        <div class="price-tier">Basic</div>
-        <div class="price-amt"><sup>$</sup>25<sub>/mo</sub></div>
-        <div class="price-desc">Perfect for getting started and landing your first government contract.</div>
-        <div class="price-divider"></div>
-        <div class="price-features">
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Daily matched contract digest</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 500 contracts per email</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Federal + state/local sources</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Industry & location filters</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct links to full postings</div>
+        <div class="p-tier">Basic</div>
+        <div class="p-price"><span class="p-dollar">$</span><span class="p-num">25</span><span class="p-period">/mo</span></div>
+        <div class="p-desc">Perfect for getting started and landing your first government contract.</div>
+        <div class="p-divider"></div>
+        <div class="p-features">
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Daily matched contract digest</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 500 contracts per email</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Federal + state/local sources</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Industry & location filters</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct links to full postings</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Basic Plan" class="price-btn price-btn-outline" style="display:block;">Get Started →</a>
+        <a href="mailto:sales@boundcs.com?subject=Basic Plan — $25/mo" class="p-btn p-btn-outline">Get Started →</a>
       </div>
 
       <div class="price-card featured">
-        <div class="popular-badge">Most Popular</div>
-        <div class="price-tier">Standard</div>
-        <div class="price-amt"><sup>$</sup>50<sub>/mo</sub></div>
-        <div class="price-desc">For active contractors ready to build a consistent pipeline of government work.</div>
-        <div class="price-divider"></div>
-        <div class="price-features">
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Basic</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 1,000 contracts per email</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Multi-state coverage</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Set-aside filtering</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Priority email support</div>
+        <div class="pop-badge">Most Popular</div>
+        <div class="p-tier">Standard</div>
+        <div class="p-price"><span class="p-dollar">$</span><span class="p-num">50</span><span class="p-period">/mo</span></div>
+        <div class="p-desc">For active contractors ready to build a real pipeline of government work.</div>
+        <div class="p-divider"></div>
+        <div class="p-features">
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Basic</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 1,000 contracts per email</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Multi-state coverage</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Set-aside filtering</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Priority email support</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Standard Plan" class="price-btn price-btn-solid" style="display:block;">Get Started →</a>
+        <a href="mailto:sales@boundcs.com?subject=Standard Plan — $50/mo" class="p-btn p-btn-solid">Get Started →</a>
       </div>
 
       <div class="price-card">
-        <div class="price-tier">Pro</div>
-        <div class="price-amt"><sup>$</sup>100<sub>/mo</sub></div>
-        <div class="price-desc">For serious contractors who want every opportunity, everywhere, with no limits.</div>
-        <div class="price-divider"></div>
-        <div class="price-features">
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Standard</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Unlimited contracts per email</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Nationwide coverage — all 50 states</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All industries covered</div>
-          <div class="pf"><div class="pf-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct access to Logan</div>
+        <div class="p-tier">Pro</div>
+        <div class="p-price"><span class="p-dollar">$</span><span class="p-num">100</span><span class="p-period">/mo</span></div>
+        <div class="p-desc">For serious contractors who want every opportunity, everywhere, with no limits.</div>
+        <div class="p-divider"></div>
+        <div class="p-features">
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Standard</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Unlimited contracts per email</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All 50 states nationwide</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All industries included</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct access to Logan</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Pro Plan" class="price-btn price-btn-outline" style="display:block;">Get Started →</a>
+        <a href="mailto:sales@boundcs.com?subject=Pro Plan — $100/mo" class="p-btn p-btn-outline">Get Started →</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- FREE GUIDE -->
-<section id="guide" style="background:rgba(255,255,255,0.015);border-top:1px solid rgba(255,255,255,0.05);">
+<!-- SIGNUP FORM -->
+<section class="signup" id="signup">
   <div class="container">
-    <div class="section-tag">Free Resource</div>
-    <div class="guide-inner">
-      <div>
-        <div class="section-title" style="font-size:32px;">The Complete<br>Bidding Playbook.</div>
-        <p style="font-size:15px;color:rgba(255,255,255,0.45);margin:16px 0 24px;line-height:1.7;">Everything a small business needs to go from zero to their first government contract — registrations, certifications, how to read a solicitation, how to price, and how to win.</p>
-        <div class="guide-points">
-          <div class="gp"><div class="gp-bullet"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Start-to-finish checklist (24 steps)</div>
-          <div class="gp"><div class="gp-bullet"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Real contract values by industry</div>
-          <div class="gp"><div class="gp-bullet"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Registration & certification guide</div>
-          <div class="gp"><div class="gp-bullet"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>How to read and price a solicitation</div>
-          <div class="gp"><div class="gp-bullet"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Complete glossary of bidding terms</div>
-        </div>
-        <a href="mailto:sales@boundcs.com?subject=Free Bidding Guide" class="btn-primary" style="display:inline-block;margin-top:28px;">Get the Free Guide →</a>
-      </div>
-      <div class="guide-pages">
-        <div class="guide-page"><span class="page-num">Phase 1</span><span class="page-title">Business foundation & legal setup</span></div>
-        <div class="guide-page"><span class="page-num">Phase 2</span><span class="page-title">Vendor registration — federal, state, local</span></div>
-        <div class="guide-page"><span class="page-num">Phase 3</span><span class="page-title">Certifications that unlock set-asides</span></div>
-        <div class="guide-page"><span class="page-num">Phase 4</span><span class="page-title">How to read, price & submit a bid</span></div>
-        <div class="guide-page"><span class="page-num">Phase 5</span><span class="page-title">Tips, glossary & common mistakes</span></div>
+    <div class="signup-inner">
+      <div class="tag">Get Started</div>
+      <div class="section-title">Tell us about your business.</div>
+      <p class="section-sub">Fill this out and we'll get your daily contract feed set up within 24 hours.</p>
+      <div class="form-card">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="fname" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" id="company" placeholder="Smith Contracting LLC" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="email" placeholder="john@yourcompany.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" id="phone" placeholder="(555) 000-0000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>What Industry Are You In?</label>
+            <select id="industry" required>
+              <option value="" disabled selected>Select your primary industry</option>
+              <option>Landscaping & Grounds</option>
+              <option>Janitorial & Cleaning</option>
+              <option>Construction (General)</option>
+              <option>HVAC & Plumbing</option>
+              <option>Electrical</option>
+              <option>Roofing & Siding</option>
+              <option>IT & Software</option>
+              <option>Security Services</option>
+              <option>Trucking & Freight</option>
+              <option>Staffing & HR</option>
+              <option>Food Service</option>
+              <option>Environmental</option>
+              <option>Property Management</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>State(s) You Operate In</label>
+              <input type="text" id="states" placeholder="FL, TX, GA..." required>
+            </div>
+            <div class="form-group">
+              <label>Plan You're Interested In</label>
+              <select id="plan" required>
+                <option value="" disabled selected>Select a plan</option>
+                <option>Basic — $25/mo</option>
+                <option>Standard — $50/mo</option>
+                <option>Pro — $100/mo</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Any Questions or Notes? (Optional)</label>
+            <textarea id="notes" placeholder="Tell us anything else — certifications you have, specific contract types you're looking for, etc."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send My Information →</button>
+          <p class="form-note">By submitting this form, your information will be emailed directly to <a href="mailto:sales@boundcs.com">sales@boundcs.com</a>. We'll follow up within 24 hours to get your feed set up. Questions? Email <a href="mailto:logan@boundcs.com">logan@boundcs.com</a> directly.</p>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section>
+<section class="cta">
   <div class="container">
-    <div class="cta-section">
+    <div class="cta-box">
       <h2>Stop missing contracts<br>that are already posted.</h2>
-      <p>Your daily bid feed takes 2 minutes to set up and starts paying for itself with the first contract you win.</p>
-      <a href="mailto:sales@boundcs.com" class="btn-primary" style="font-size:16px;padding:16px 40px;">Subscribe Now — Starting at $25/mo</a>
-      <div class="cta-emails">
-        <div class="cta-email-card">
-          <div class="cta-email-role">Subscriptions & Sales</div>
-          <div class="cta-email-addr">sales@boundcs.com</div>
-          <div class="cta-email-name">Get started or ask about plans</div>
+      <p>Your daily bid feed takes one email to set up. The first contract you win pays for years of subscription.</p>
+      <a href="#signup" class="btn-primary" style="font-size:16px;padding:16px 40px;">Get My Daily Feed →</a>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="cc-role">Subscriptions & Sales</div>
+          <div class="cc-email">sales@boundcs.com</div>
+          <div class="cc-name">Get started or ask about plans</div>
         </div>
-        <div class="cta-email-card">
-          <div class="cta-email-role">Founder & Support</div>
-          <div class="cta-email-addr">logan@boundcs.com</div>
-          <div class="cta-email-name">Logan Pettenger · Direct support</div>
+        <div class="contact-card">
+          <div class="cc-role">Founder & Support</div>
+          <div class="cc-email">logan@boundcs.com</div>
+          <div class="cc-name">Logan Pettenger · Direct support</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-</main>
-
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>© 2026 Bound Contracting Services · logan@boundcs.com · sales@boundcs.com</p>
+    <div class="footer-inner">
+      <div class="footer-logo">BOUND<span>CS</span></div>
+      <p>© 2026 Bound Contracting Services · Logan Pettenger, Founder</p>
+      <p>sales@boundcs.com · logan@boundcs.com</p>
+    </div>
   </div>
 </footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('fname').value;
+  const company = document.getElementById('company').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const industry = document.getElementById('industry').value;
+  const states = document.getElementById('states').value;
+  const plan = document.getElementById('plan').value;
+  const notes = document.getElementById('notes').value;
+
+  const subject = encodeURIComponent(`New BCS Subscriber — ${name} · ${company}`);
+  const body = encodeURIComponent(
+    `New subscriber inquiry from the website:\n\n` +
+    `Name: ${name}\n` +
+    `Company: ${company}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone}\n` +
+    `Industry: ${industry}\n` +
+    `States: ${states}\n` +
+    `Plan: ${plan}\n` +
+    `Notes: ${notes || 'None'}`
+  );
+
+  window.location.href = `mailto:sales@boundcs.com?subject=${subject}&body=${body}`;
+}
+
+// Animate bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.bar-fill, .wr-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => { bar.style.width = w; }, 100);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.chart-card').forEach(card => observer.observe(card));
+</script>
 
 </body>
 </html>
