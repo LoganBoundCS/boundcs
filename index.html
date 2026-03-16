@@ -51,20 +51,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:299;background:rgba(7,12,26,0.9)
 .nav-links a:hover{color:#fff;}
 .nav-actions{display:flex;gap:12px;align-items:center;}
 .nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;transition:all 0.2s;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:300;position:relative;-webkit-tap-highlight-color:transparent;}
-.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;}
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-#nav-toggle:checked + div .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-#nav-toggle:checked + div .hamburger span:nth-child(2){opacity:0;}
-#nav-toggle:checked + div .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,12,26,0.98);backdrop-filter:blur(20px);z-index:198;padding:80px 0 24px;overflow-y:auto;}
-#nav-toggle:checked ~ .mobile-menu{display:block;}
-.mobile-menu a{display:block;padding:18px 32px;font-size:17px;color:rgba(255,255,255,0.75);border-bottom:1px solid rgba(255,255,255,0.04);}
-.mobile-menu a:hover{color:#fff;background:rgba(255,255,255,0.03);}
-.mobile-menu .mob-cta{background:var(--blue);color:#fff;margin:16px 20px;border-radius:10px;text-align:center;font-weight:600;}
-.mobile-menu .mob-cta:hover{background:var(--blue-dark);}
+
+
+
+
+
+
+
+
+
+
+
 .nav-cta:hover{background:var(--blue-dark);}
 
 /* ── HERO ── */
@@ -287,33 +284,52 @@ footer{padding:40px 0;border-top:1px solid var(--border);}
 footer p{font-size:13px;color:var(--text-dim);}
 
 /* ── RESPONSIVE ── */
+
+.mobile-nav-row{display:none;}
 @media(max-width:900px){
   .nav-links{display:none;}
-  .container{padding:0 20px;}
   #nav-cta-desktop{display:none;}
-  .hamburger{display:flex;}
-  .how-grid,.why-layout,.charts-grid,.guide-top,.pricing-grid{grid-template-columns:1fr;}
+  .mobile-nav-row{
+    display:flex;
+    align-items:center;
+    gap:0;
+    overflow-x:auto;
+    border-top:1px solid rgba(255,255,255,0.06);
+    padding:0 4px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .mobile-nav-row::-webkit-scrollbar{display:none;}
+  .mobile-nav-row a{
+    flex-shrink:0;
+    padding:10px 14px;
+    font-size:13px;
+    color:rgba(255,255,255,0.6);
+    white-space:nowrap;
+  }
+  .mobile-nav-row a:hover{color:#fff;}
+  .mobile-nav-row .mob-nav-cta{
+    background:var(--blue);
+    color:#fff;
+    border-radius:7px;
+    margin:6px 8px 6px auto;
+    padding:7px 14px;
+    font-weight:600;
+    flex-shrink:0;
+  }
+  .container{padding:0 20px;}
+  .how-grid,.why-layout,.charts-grid,.pricing-grid,.guide-top{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
   .cta-box{padding:48px 24px;border-radius:20px;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  .stat{border-right:none;border-bottom:1px solid var(--border);}
-  .guide-download{flex-direction:column;}
   .guide-top{padding:28px 24px;}
   .guide-inner{border-radius:16px;}
   .nav-inner{padding:14px 20px;}
+  .pricing-grid{gap:16px;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .stat{border-right:none;border-bottom:1px solid var(--border);}
+  .toc ol{grid-template-columns:1fr;}
 }
 
-/* Mobile overflow fixes */
-img,svg,table,video{max-width:100%;}
-.stats-grid{overflow:hidden;}
-.ind-grid{overflow:hidden;}
-.how-grid,.why-layout,.charts-grid,.pricing-grid,.guide-top{overflow:hidden;}
-.mock-inbox{min-width:0;word-break:break-word;}
-.contract-item{min-width:0;}
-.ci-title{word-break:break-word;}
-.money-table{overflow:hidden;}
-.hero h1{word-break:break-word;}
-.container{overflow:hidden;}
 </style>
 </head>
 <body>
@@ -332,12 +348,16 @@ img,svg,table,video{max-width:100%;}
       <a href="/tos" style="color:rgba(255,255,255,0.35);font-size:13px;">Terms</a>
     </div>
     <div class="nav-actions">
-      <a href="#signup" class="nav-cta" id="nav-cta-desktop">Get Started</a>
-      <label class="hamburger" for="nav-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </label>
+      <a href="#signup" class="nav-cta">Get Started</a>
     </div>
-    <input type="checkbox" id="nav-toggle" style="display:none;">
+  </div>
+  <div class="mobile-nav-row">
+    <a href="#how">How It Works</a>
+    <a href="#why">Why Bid</a>
+    <a href="#guide">Guide</a>
+    <a href="#pricing">Pricing</a>
+    <a href="/tos">Terms</a>
+    <a href="#signup" class="mob-nav-cta">Get Started</a>
   </div>
 </nav>
 
