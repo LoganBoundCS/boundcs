@@ -542,7 +542,7 @@ footer p{font-size:13px;color:var(--text-dim);}
             <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>How to read, price, and submit a winning bid</div>
             <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Complete glossary of bidding terms</div>
           </div>
-          <a href="mailto:sales@boundcs.com?subject=Free Bidding Guide Request" class="btn-teal">Get the Free Guide →</a>
+          <a href="#guide-form" class="btn-teal" onclick="document.getElementById('guide-form').scrollIntoView({behavior:'smooth'});return false;">Get the Free Guide ↓</a>
         </div>
         <div class="guide-phases">
           <div class="gp"><span class="gp-tag">Phase 1</span><span class="gp-title">Business & legal foundation</span></div>
@@ -557,7 +557,12 @@ footer p{font-size:13px;color:var(--text-dim);}
           <h4>Ready to get started?</h4>
           <p>Email us and we'll send the full guide directly to your inbox — free, no strings attached.</p>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Free Bidding Guide Request" class="btn-teal">Email for Free Guide →</a>
+        <form id="guide-form" action="https://formspree.io/f/maqpdraw" method="POST" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <input type="hidden" name="_subject" value="Free Bidding Guide Request">
+          <input type="hidden" name="request_type" value="Free Guide">
+          <input type="email" name="email" placeholder="Your email address" required style="flex:1;min-width:220px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 16px;font-size:14px;color:#fff;outline:none;font-family:inherit;">
+          <button type="submit" class="btn-teal" style="white-space:nowrap;">Send Me the Guide →</button>
+        </form>
       </div>
     </div>
   </div>
@@ -661,30 +666,33 @@ footer p{font-size:13px;color:var(--text-dim);}
       <div class="section-title">Tell us about your business.</div>
       <p class="section-sub">Fill this out and we'll get your daily contract feed set up within 24 hours.</p>
       <div class="form-card">
-        <form onsubmit="handleSubmit(event)">
+        <form action="https://formspree.io/f/maqpdraw" method="POST">
+          <input type="hidden" name="_subject" value="New BCS Subscriber Inquiry">
+          <input type="hidden" name="_replyto" value="sales@boundcs.com">
+          
           <div class="form-row">
             <div class="form-group">
               <label>Full Name</label>
-              <input type="text" id="fname" placeholder="John Smith" required>
+              <input type="text" id="fname" name="name" placeholder="John Smith" required>
             </div>
             <div class="form-group">
               <label>Company Name</label>
-              <input type="text" id="company" placeholder="Smith Contracting LLC" required>
+              <input type="text" id="company" name="company" placeholder="Smith Contracting LLC" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" id="email" placeholder="john@yourcompany.com" required>
+              <input type="email" id="email" name="email" placeholder="john@yourcompany.com" required>
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" id="phone" placeholder="(555) 000-0000">
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
             </div>
           </div>
           <div class="form-group">
             <label>What Industry Are You In?</label>
-            <select id="industry" required>
+            <select id="industry" name="industry" required>
               <option value="" disabled selected>Select your primary industry</option>
               <option>Landscaping & Grounds</option>
               <option>Janitorial & Cleaning</option>
@@ -705,11 +713,11 @@ footer p{font-size:13px;color:var(--text-dim);}
           <div class="form-row">
             <div class="form-group">
               <label>State(s) You Operate In</label>
-              <input type="text" id="states" placeholder="FL, TX, GA..." required>
+              <input type="text" id="states" name="states" placeholder="FL, TX, GA..." required>
             </div>
             <div class="form-group">
               <label>Plan You're Interested In</label>
-              <select id="plan" required>
+              <select id="plan" name="plan" required>
                 <option value="" disabled selected>Select a plan</option>
                 <option>Basic — $25/mo</option>
                 <option>Standard — $50/mo</option>
@@ -720,7 +728,7 @@ footer p{font-size:13px;color:var(--text-dim);}
           </div>
           <div class="form-group">
             <label>Any Questions or Notes? (Optional)</label>
-            <textarea id="notes" placeholder="Tell us anything else — certifications you have, specific contract types you're looking for, etc."></textarea>
+            <textarea id="notes" name="notes" placeholder="Tell us anything else — certifications you have, specific contract types you're looking for, etc."></textarea>
           </div>
           <button type="submit" class="form-submit">Send My Information →</button>
           <p class="form-note">By submitting this form, your information will be emailed directly to <a href="mailto:sales@boundcs.com">sales@boundcs.com</a>. We'll follow up within 24 hours to get your feed set up. Questions? Email <a href="mailto:logan@boundcs.com">logan@boundcs.com</a> directly.</p>
@@ -765,33 +773,6 @@ footer p{font-size:13px;color:var(--text-dim);}
 </footer>
 
 <script>
-function handleSubmit(e) {
-  e.preventDefault();
-  const name = document.getElementById('fname').value;
-  const company = document.getElementById('company').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const industry = document.getElementById('industry').value;
-  const states = document.getElementById('states').value;
-  const plan = document.getElementById('plan').value;
-  const notes = document.getElementById('notes').value;
-
-  const subject = encodeURIComponent(`New BCS Subscriber — ${name} · ${company}`);
-  const body = encodeURIComponent(
-    `New subscriber inquiry from the website:\n\n` +
-    `Name: ${name}\n` +
-    `Company: ${company}\n` +
-    `Email: ${email}\n` +
-    `Phone: ${phone}\n` +
-    `Industry: ${industry}\n` +
-    `States: ${states}\n` +
-    `Plan: ${plan}\n` +
-    `Notes: ${notes || 'None'}`
-  );
-
-  window.location.href = `mailto:sales@boundcs.com?subject=${subject}&body=${body}`;
-}
-
 // Animate bars on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
