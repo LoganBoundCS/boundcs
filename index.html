@@ -232,6 +232,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(6,11,24,0.88
 .p-btn-outline{background:transparent;color:var(--blue);border:1px solid rgba(59,130,246,0.35);}
 .p-btn-outline:hover{background:rgba(59,130,246,0.08);}
 .p-btn-solid{background:var(--blue);color:#fff;border:none;}
+.p-limit{font-size:11px;background:rgba(59,130,246,0.08);color:#93C5FD;padding:2px 8px;border-radius:4px;font-weight:600;margin-left:4px;}
 .p-btn-solid:hover{background:var(--blue-dark);}
 
 /* ── SIGNUP FORM ── */
@@ -542,7 +543,10 @@ footer p{font-size:13px;color:var(--text-dim);}
             <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>How to read, price, and submit a winning bid</div>
             <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Complete glossary of bidding terms</div>
           </div>
-          <a href="#guide-form" class="btn-teal" onclick="document.getElementById('guide-form').scrollIntoView({behavior:'smooth'});return false;">Get the Free Guide ↓</a>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="GOOGLE_DRIVE_LINK_HERE" target="_blank" class="btn-teal" id="guide-dl-btn">Download Free Guide (PDF) ↓</a>
+          <p style="font-size:12px;color:rgba(255,255,255,0.35);">No email required — direct download.</p>
+        </div>
         </div>
         <div class="guide-phases">
           <div class="gp"><span class="gp-tag">Phase 1</span><span class="gp-title">Business & legal foundation</span></div>
@@ -604,57 +608,66 @@ footer p{font-size:13px;color:var(--text-dim);}
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="tag">Pricing</div>
-    <div class="section-title">Simple, transparent pricing.<br>No hidden fees.</div>
-    <p class="section-sub">Email sales@boundcs.com to subscribe or ask questions. Cancel anytime.</p>
+    <div class="section-title">Simple pricing.<br>Real differences between tiers.</div>
+    <p class="section-sub">Pay for what you actually need. Every plan includes direct support from Logan.</p>
     <div class="pricing-grid">
 
       <div class="price-card">
         <div class="p-tier">Basic</div>
         <div class="p-price"><span class="p-dollar">$</span><span class="p-num">25</span><span class="p-period">/mo</span></div>
-        <div class="p-desc">Perfect for getting started and landing your first government contract.</div>
+        <div class="p-desc">Best for contractors just getting started in their local market.</div>
         <div class="p-divider"></div>
         <div class="p-features">
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Daily matched contract digest</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 500 contracts per email</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>1 state coverage</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 5 NAICS industries</div>
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Federal + state/local sources</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Industry & location filters</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 50 contracts per email</div>
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct links to full postings</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Free bidding guide included</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Email support</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Basic Plan — $25/mo" class="p-btn p-btn-outline">Get Started →</a>
+        <a href="#signup" class="p-btn p-btn-outline">Get Started →</a>
       </div>
 
       <div class="price-card featured">
         <div class="pop-badge">Most Popular</div>
         <div class="p-tier">Standard</div>
         <div class="p-price"><span class="p-dollar">$</span><span class="p-num">50</span><span class="p-period">/mo</span></div>
-        <div class="p-desc">For active contractors ready to build a real pipeline of government work.</div>
+        <div class="p-desc">For active contractors building a pipeline across multiple states and industries.</div>
         <div class="p-divider"></div>
         <div class="p-features">
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Basic</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 1,000 contracts per email</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Multi-state coverage</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Set-aside filtering</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 3 states</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All industries — no limit</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Up to 150 contracts per email</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Set-aside filtering (SB, SDVOSB, WOSB, HUBZone, 8a)</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Weekly bid summary report</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Due date reminders</div>
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Priority email support</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Standard Plan — $50/mo" class="p-btn p-btn-solid">Get Started →</a>
+        <a href="#signup" class="p-btn p-btn-solid">Get Started →</a>
       </div>
 
       <div class="price-card">
         <div class="p-tier">Pro</div>
         <div class="p-price"><span class="p-dollar">$</span><span class="p-num">100</span><span class="p-period">/mo</span></div>
-        <div class="p-desc">For serious contractors who want every opportunity, everywhere, with no limits.</div>
+        <div class="p-desc">For contractors who want every opportunity across the entire country, no limits.</div>
         <div class="p-divider"></div>
         <div class="p-features">
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Everything in Standard</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All 50 states — full nationwide coverage</div>
           <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Unlimited contracts per email</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All 50 states nationwide</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>All industries included</div>
-          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Direct access to Logan</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Contract value estimates on each listing</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Instant alerts for high-value contracts</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Full bid deadline tracking dashboard</div>
+          <div class="pf"><div class="pf-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Priority support — fastest response</div>
         </div>
-        <a href="mailto:sales@boundcs.com?subject=Pro Plan — $100/mo" class="p-btn p-btn-outline">Get Started →</a>
+        <a href="#signup" class="p-btn p-btn-outline">Get Started →</a>
       </div>
 
     </div>
+    <p style="text-align:center;font-size:13px;color:var(--text-dim);margin-top:32px;">All plans include direct support from Logan. Cancel anytime. Email <a href="mailto:sales@boundcs.com" style="color:var(--blue-light);">sales@boundcs.com</a> to get started.</p>
   </div>
 </section>
 
@@ -692,7 +705,7 @@ footer p{font-size:13px;color:var(--text-dim);}
           </div>
           <div class="form-group">
             <label>What Industry Are You In?</label>
-            <select id="industry" name="industry" required>
+            <select id="industry" name="industry" required onchange="toggleOtherIndustry(this.value)">
               <option value="" disabled selected>Select your primary industry</option>
               <option>Landscaping & Grounds</option>
               <option>Janitorial & Cleaning</option>
@@ -709,6 +722,10 @@ footer p{font-size:13px;color:var(--text-dim);}
               <option>Property Management</option>
               <option>Other</option>
             </select>
+          </div>
+          <div class="form-group" id="other-industry-group" style="display:none;">
+            <label>Please describe your industry</label>
+            <input type="text" id="other-industry" name="other_industry" placeholder="e.g. Pest Control, Printing, Equipment Rental...">
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -773,6 +790,18 @@ footer p{font-size:13px;color:var(--text-dim);}
 </footer>
 
 <script>
+function toggleOtherIndustry(val) {
+  const grp = document.getElementById('other-industry-group');
+  const inp = document.getElementById('other-industry');
+  if (val === 'Other') {
+    grp.style.display = 'flex';
+    inp.required = true;
+  } else {
+    grp.style.display = 'none';
+    inp.required = false;
+  }
+}
+
 // Animate bars on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
