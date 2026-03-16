@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#070C1A;color:#E2E8F4;line-height:1.6;overflow-x:hidden;}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#070C1A;color:#E2E8F4;line-height:1.6;overflow-x:hidden;}html,body{max-width:100%;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
 
 /* ── VARIABLES ── */
@@ -275,15 +275,29 @@ footer p{font-size:13px;color:var(--text-dim);}
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .nav-links{display:none;}
+  .container{padding:0 20px;}
   .how-grid,.why-layout,.charts-grid,.guide-top,.pricing-grid{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
-  .cta-box{padding:48px 28px;}
+  .cta-box{padding:48px 24px;border-radius:20px;}
   .stats-grid{grid-template-columns:1fr 1fr;}
   .stat{border-right:none;border-bottom:1px solid var(--border);}
   .guide-download{flex-direction:column;}
-  .guide-top{padding:32px;}
-  .nav-inner{padding:16px 20px;}
+  .guide-top{padding:28px 24px;}
+  .guide-inner{border-radius:16px;}
+  .nav-inner{padding:14px 20px;}
 }
+
+/* Mobile overflow fixes */
+img,svg,table,video{max-width:100%;}
+.stats-grid{overflow:hidden;}
+.ind-grid{overflow:hidden;}
+.how-grid,.why-layout,.charts-grid,.pricing-grid,.guide-top{overflow:hidden;}
+.mock-inbox{min-width:0;word-break:break-word;}
+.contract-item{min-width:0;}
+.ci-title{word-break:break-word;}
+.money-table{overflow:hidden;}
+.hero h1{word-break:break-word;}
+.container{overflow:hidden;}
 </style>
 </head>
 <body>
@@ -545,7 +559,7 @@ footer p{font-size:13px;color:var(--text-dim);}
             <div class="gc"><div class="gc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Complete glossary of bidding terms</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:12px;">
-          <a href="GOOGLE_DRIVE_LINK_HERE" target="_blank" class="btn-teal" id="guide-dl-btn">Download Free Guide (PDF) ↓</a>
+          <a href="https://docs.google.com/document/d/1LXeBzx_kuSP_Q3cVrzmioecOaGJ5eL46/export?format=pdf" target="_blank" class="btn-teal" id="guide-dl-btn">Download Free Guide (PDF) ↓</a>
           <p style="font-size:12px;color:rgba(255,255,255,0.35);">No email required — direct download.</p>
         </div>
         </div>
